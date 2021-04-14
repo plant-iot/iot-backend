@@ -31,10 +31,13 @@ public class Data {
     public Data() {
     }
 
-    public Data(LocalDateTime time, Device device) {
+
+    public Data(LocalDateTime time, Device device, DataType type, Double value) {
         this.time = time;
         this.device = device;
-        this.id = time + "-" + device.getDeviceId();
+        this.id = time + "-" + device.getDeviceId() + "-" + type;
+        this.type = type;
+        this.value = value;
     }
 
     public String getId() {

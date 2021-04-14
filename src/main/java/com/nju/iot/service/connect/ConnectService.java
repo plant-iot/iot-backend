@@ -10,5 +10,5 @@ import com.nju.iot.entity.CommandType;
  */
 public interface ConnectService {
     // 下发命令
-    void sendCommand(Long deviceId, String command, CommandType type);
+    boolean sendCommand(Long deviceId, String command, CommandType type);
 }

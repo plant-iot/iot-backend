@@ -7,7 +7,23 @@ package com.nju.iot.entity;
  * @description:
  */
 public enum DeviceType {
-    TEMPERATURE_SENSOR,
-    HUMIDITY_SENSOR,
-    DEVICE_RECEIVE_COMMAND;
+    DATA_DEVICE(false, true),
+    COMMAND_DEVICE(true, false),
+    DATA_COMMAND_DEVICE(true, true);
+
+    private final boolean canSendCommand;
+    private final boolean canGetData;
+
+    DeviceType(boolean canSendCommand, boolean canGetData) {
+        this.canSendCommand = canSendCommand;
+        this.canGetData = canGetData;
+    }
+
+    public boolean isCanSendCommand() {
+        return canSendCommand;
+    }
+
+    public boolean isCanGetData() {
+        return canGetData;
+    }
 }

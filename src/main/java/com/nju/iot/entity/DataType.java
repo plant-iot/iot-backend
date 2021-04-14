@@ -7,7 +7,14 @@ package com.nju.iot.entity;
  * @description:
  */
 public enum DataType {
-    TEMPERATURE("temperature");
+    TEMPERATURE("temperature"),
+    HUMIDITY("humidity"),
+    CO2("CO2"),
+    LIGHT_INTENSITY("light intensity"),
+    N_CONTENT("N content"),
+    P_CONTENT("P content"),
+    K_CONTENT("K content"),
+    MG_CONTENT("Mg content");
 
     private final String s;
 

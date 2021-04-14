@@ -26,7 +26,10 @@ public class ConnectImpl implements ConnectService {
     private CommandRepository commandRepository;
 
     @Override
-    public void sendCommand(Long deviceId, String command, CommandType type) {
+    public boolean sendCommand(Long deviceId, String command, CommandType type) {
+        if(!deviceRepository.existsById(deviceId)) {
+            return false;
+        }
         Device device = deviceRepository.findById(deviceId).get();
         String topic = device.getTopic();
         mqttPushClient.publish(0, true, topic, command);
@@ -34,5 +37,6 @@ public class ConnectImpl implements ConnectService {
         LocalDateTime time = LocalDateTime.now();
         Command commandEntity = new Command(device, time, type, command);
         commandRepository.save(commandEntity);
+        return true;
     }
 }

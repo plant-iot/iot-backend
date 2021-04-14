@@ -3,6 +3,11 @@ package com.nju.iot.service.connect;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.nju.iot.dao.DataRepository;
+import com.nju.iot.dao.DeviceRepository;
+import com.nju.iot.entity.Data;
+import com.nju.iot.entity.DataType;
+import com.nju.iot.entity.Device;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -11,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 /**
  * @author: xiang
@@ -24,6 +31,10 @@ public class PushCallback implements MqttCallback {
 
     @Autowired
     private MqttProperties mqttProperties;
+    @Autowired
+    private DataRepository dataRepository;
+    @Autowired
+    private DeviceRepository deviceRepository;
 
     private static MqttClient client;
 
@@ -48,15 +59,22 @@ public class PushCallback implements MqttCallback {
             Long deviceId = Long.valueOf(topicList[1]);
             logger.info("接收到来自设备{}的消息", deviceId);
 
+            if(!deviceRepository.existsById(deviceId)) {
+                return;
+            }
+            Device device = deviceRepository.findById(deviceId).get();
+            LocalDateTime time = LocalDateTime.now();
+
             String msg = new String(mqttMessage.getPayload());
             try {
                 JSONObject jsonObject = JSON.parseObject(msg);
                 System.out.println(jsonObject.toJSONString());
-                JSONObject dataObject = jsonObject.getJSONObject("data");
-                if(dataObject == null) {
-                    logger.info("data object == null");
-                }else {
-                    logger.info("data object: {}", dataObject.toJSONString());
+                for(DataType dataType : DataType.values()) {
+                    if(jsonObject.containsKey(dataType.getS())) {
+                        double value = jsonObject.getDoubleValue(dataType.getS());
+                        Data data = new Data(time, device, dataType, value);
+                        dataRepository.save(data);
+                    }
                 }
 
             } catch (JSONException e) {
