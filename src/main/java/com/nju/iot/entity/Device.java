@@ -1,8 +1,11 @@
 package com.nju.iot.entity;
 
+import com.nju.iot.service.connect.MqttProperties;
 import com.sun.istack.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author: xiang
@@ -23,7 +26,25 @@ public class Device {
     private DeviceType type;
 
     @NotNull
-    private String topic;
+    private String topic = "";
+
+    @NotNull
+    private LocalDateTime registerTime;
+
+    @Enumerated(EnumType.STRING)
+    private DeviceState state = DeviceState.IN_USE;
+
+    @NotNull
+    private Boolean isOnline = true;
+
+    public Device() {
+    }
+
+    public Device(User user, DeviceType type) {
+        this.user = user;
+        this.type = type;
+        this.registerTime = LocalDateTime.now();
+    }
 
     public Long getDeviceId() {
         return deviceId;
@@ -55,5 +76,29 @@ public class Device {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public LocalDateTime getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(LocalDateTime registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    public DeviceState getState() {
+        return state;
+    }
+
+    public void setState(DeviceState state) {
+        this.state = state;
+    }
+
+    public Boolean getOnline() {
+        return isOnline;
+    }
+
+    public void setOnline(Boolean online) {
+        isOnline = online;
     }
 }
