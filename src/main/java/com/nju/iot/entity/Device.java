@@ -1,8 +1,6 @@
 package com.nju.iot.entity;
 
-import com.nju.iot.service.connect.MqttProperties;
 import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,7 +30,7 @@ public class Device {
     private LocalDateTime registerTime;
 
     @Enumerated(EnumType.STRING)
-    private DeviceState state = DeviceState.IN_USE;
+    private DeviceAction state = DeviceAction.IN_USE;
 
     @NotNull
     private Boolean isOnline = true;
@@ -86,11 +84,11 @@ public class Device {
         this.registerTime = registerTime;
     }
 
-    public DeviceState getState() {
+    public DeviceAction getState() {
         return state;
     }
 
-    public void setState(DeviceState state) {
+    public void setState(DeviceAction state) {
         this.state = state;
     }
 

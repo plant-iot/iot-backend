@@ -30,6 +30,7 @@ public class MqttProperties {
     private String defaultTopic;
     private int timeout;
     private int keepalive;
+    private String sysTopic;
 
     public String getUrl() {
         return url;
@@ -59,10 +60,21 @@ public class MqttProperties {
         return keepalive;
     }
 
+    public String getSysTopic() {
+        return sysTopic;
+    }
+
     @Bean
     public MqttPushClient getMqttPushClient() {
         mqttPushClient.connect(url, clientId, username, password, timeout, keepalive);
         mqttPushClient.subscribe(defaultTopic);
+        return mqttPushClient;
+    }
+
+    @Bean
+    public MqttPushClient getMqttPushSysClient() {
+        mqttPushClient.connect(url, clientId, username, password, timeout, keepalive);
+        mqttPushClient.subscribe(sysTopic);
         return mqttPushClient;
     }
 }
