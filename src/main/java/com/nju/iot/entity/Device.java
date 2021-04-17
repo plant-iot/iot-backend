@@ -16,7 +16,7 @@ public class Device {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long deviceId;
 
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch= FetchType.EAGER)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch= FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
