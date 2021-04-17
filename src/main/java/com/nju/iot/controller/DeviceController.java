@@ -60,8 +60,7 @@ public class DeviceController {
     @ApiOperation("添加设备")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id"),
-            @ApiImplicitParam(name = "type", value = "设备类型"),
-//            @ApiImplicitParam(name = "type", value = "命令类型")
+            @ApiImplicitParam(name = "type", value = "设备类型")
     })
     public long addDevice(Long userId, String type) {
         return deviceService.addDevice(userId, DeviceType.getType(type));

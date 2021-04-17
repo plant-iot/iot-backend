@@ -7,9 +7,8 @@ import java.time.LocalDateTime;
 
 /**
  * @author: xiang
- * TODO
  * @date: 2021/4/17
- * @description:
+ * @description: 记录设备上线、下线信息
  */
 @Entity
 public class DeviceOnOffRecord {
