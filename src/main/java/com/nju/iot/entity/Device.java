@@ -35,6 +35,10 @@ public class Device {
     @NotNull
     private Boolean isOnline = true;
 
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch= FetchType.EAGER)
+    @JoinColumn(name = "thing_model")
+    private ThingModel model;
+
     public Device() {
     }
 
@@ -42,10 +46,26 @@ public class Device {
         this.user = user;
         this.type = type;
         this.registerTime = LocalDateTime.now();
+        this.model = new ThingModel(type);
+    }
+
+    public Device(User user, DeviceType type, ThingModel model) {
+        this.user = user;
+        this.type = type;
+        this.registerTime = LocalDateTime.now();
+        this.model = model;
     }
 
     public Long getDeviceId() {
         return deviceId;
+    }
+
+    public ThingModel getModel() {
+        return model;
+    }
+
+    public void setModel(ThingModel model) {
+        this.model = model;
     }
 
     public void setDeviceId(Long deviceId) {

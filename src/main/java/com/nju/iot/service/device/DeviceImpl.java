@@ -1,10 +1,9 @@
 package com.nju.iot.service.device;
 
-import com.nju.iot.dao.DeviceRepository;
-import com.nju.iot.dao.UserRepository;
-import com.nju.iot.entity.Device;
-import com.nju.iot.entity.DeviceType;
-import com.nju.iot.entity.User;
+import com.nju.iot.dao.*;
+import com.nju.iot.entity.*;
+import com.nju.iot.payloads.ThingModelRequest;
+import com.nju.iot.service.thingModel.ThingModelInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +20,11 @@ public class DeviceImpl implements DeviceService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ThingModelInterface thingModelInterface;
+
+
+
     @Override
     public long addDevice(Long userId, DeviceType type) {
         if(!userRepository.existsById(userId)) {
@@ -34,4 +38,22 @@ public class DeviceImpl implements DeviceService {
         deviceRepository.save(device);
         return device.getDeviceId();
     }
+
+    @Override
+    public long addDevice(Long userId, DeviceType type, ThingModelRequest modelRequest) {
+
+        if(!userRepository.existsById(userId)) {
+            return -1;
+        }
+
+        User user = userRepository.findById(userId).get();
+        ThingModel model = thingModelInterface.persistThingModel(modelRequest);
+        Device device = new Device(user, type, model);
+        deviceRepository.save(device);
+        device.setTopic("test/" + device.getDeviceId());
+        deviceRepository.save(device);
+        return device.getDeviceId();
+    }
+
+
 }

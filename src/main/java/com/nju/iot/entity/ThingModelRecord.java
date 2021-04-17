@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class ThingModelRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int modelId;
+    private Long recordId;
 
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch= FetchType.EAGER)
     @JoinColumn(name = "thing_model")
@@ -24,9 +24,24 @@ public class ThingModelRecord {
     public ThingModelRecord() {
     }
 
-    public ThingModelRecord(int modelId, ThingModel model, ThingModelService service) {
-        this.modelId = modelId;
+    public ThingModelRecord(ThingModel model, ThingModelService service) {
         this.model = model;
+        this.service = service;
+    }
+
+    public ThingModel getModel() {
+        return model;
+    }
+
+    public void setModel(ThingModel model) {
+        this.model = model;
+    }
+
+    public ThingModelService getService() {
+        return service;
+    }
+
+    public void setService(ThingModelService service) {
         this.service = service;
     }
 }
