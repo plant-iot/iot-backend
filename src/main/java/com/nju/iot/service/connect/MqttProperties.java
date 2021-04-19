@@ -21,6 +21,8 @@ import org.springframework.context.annotation.Configuration;
 public class MqttProperties {
     @Autowired
     private MqttPushClient mqttPushClient;
+    @Autowired
+    private SysPushClient sysPushClient;
 
     private String url;
     private String username;
@@ -71,9 +73,9 @@ public class MqttProperties {
     }
 
     @Bean
-    public MqttPushClient getMqttPushSysClient() {
-        mqttPushClient.connect(url, clientId, username, password, timeout, keepalive);
-        mqttPushClient.subscribe(sysTopic);
-        return mqttPushClient;
+    public SysPushClient getMqttPushSysClient() {
+        sysPushClient.connect(url, "iot platform", "iot platform", "iot", timeout, keepalive);
+        sysPushClient.subscribe(sysTopic);
+        return sysPushClient;
     }
 }

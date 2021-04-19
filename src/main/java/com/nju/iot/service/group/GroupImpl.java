@@ -44,15 +44,12 @@ public class GroupImpl implements GroupService {
 
         if(deviceIdList != null) {
             for(Long deviceId : deviceIdList) {
-                System.out.println("todo: device: " + deviceId);
                 if(deviceRepository.existsById(deviceId)) {
                     Device device = deviceRepository.findById(deviceId).get();
                     DeviceGroupRelation relation = new DeviceGroupRelation(device, group);
                     deviceGroupRelationRepository.save(relation);
                 }
             }
-        }else {
-            System.out.println("list == null");
         }
 
         return true;

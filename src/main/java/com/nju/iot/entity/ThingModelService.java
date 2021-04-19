@@ -1,6 +1,8 @@
 package com.nju.iot.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import com.sun.istack.NotNull;
 
@@ -15,8 +17,8 @@ public class ThingModelService {
     int type;
 
     @Id
-    @NotNull
-    String serviceName;
+    @Enumerated(EnumType.STRING)
+    ServiceName serviceName;
 
     @NotNull
     String description = "";
@@ -29,10 +31,10 @@ public class ThingModelService {
     public ThingModelService() {
     }
 
-    public ThingModelService(int type, String name, String description, String unit, double quantity) {
+    public ThingModelService(int type, ServiceName name, String description, String unit, double quantity) {
         this.type = type;
         this.serviceName = name;
-        this.description = description;
+        this.description = name.getS();
         this.unit = unit;
         this.quantity = quantity;
     }
@@ -45,11 +47,11 @@ public class ThingModelService {
         this.type = type;
     }
 
-    public String getServiceName() {
+    public ServiceName getServiceName() {
         return serviceName;
     }
 
-    public void setServiceName(String serviceName) {
+    public void setServiceName(ServiceName serviceName) {
         this.serviceName = serviceName;
     }
 
