@@ -8,6 +8,9 @@ import com.nju.iot.service.thingModel.ThingModelInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author: xiang
  * TODO
@@ -94,5 +97,17 @@ public class DeviceImpl implements DeviceService {
         }
         Device device = deviceRepository.findById(deviceId).get();
         return new DeviceInfo(device);
+    }
+
+    @Override
+    public List<DeviceInfo> getDeviceInfoList(long userId) {
+        List<DeviceInfo> deviceInfoList = new LinkedList<>();
+
+        List<Device> deviceList = deviceRepository.findDistinctByUserId(userId);
+        for(Device device : deviceList) {
+            deviceInfoList.add(new DeviceInfo(device));
+        }
+
+        return deviceInfoList;
     }
 }

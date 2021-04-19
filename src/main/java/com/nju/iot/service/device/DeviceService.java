@@ -4,6 +4,8 @@ import com.nju.iot.entity.DeviceType;
 import com.nju.iot.payloads.DeviceInfo;
 import com.nju.iot.payloads.ThingModelRequest;
 
+import java.util.List;
+
 /**
  * @author: xiang
  * TODO
@@ -30,4 +32,7 @@ public interface DeviceService {
 
     // 查看设备信息
     DeviceInfo getDeviceInfo(long deviceId);
+
+    // 查看用户的设备信息列表
+    List<DeviceInfo> getDeviceInfoList(long userId);
 }

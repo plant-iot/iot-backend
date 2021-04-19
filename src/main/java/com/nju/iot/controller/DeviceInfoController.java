@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author: xiang
  * TODO
@@ -29,7 +31,16 @@ public class DeviceInfoController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "deviceId", value = "设备id"),
     })
-    public DeviceInfo sendCommand(long deviceId) {
+    public DeviceInfo getDeviceInfo(long deviceId) {
         return deviceService.getDeviceInfo(deviceId);
+    }
+
+    @GetMapping("/getDeviceInfoList")
+    @ApiOperation("查看用户的设备信息列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id"),
+    })
+    public List<DeviceInfo> getDeviceInfoList(long userId) {
+        return deviceService.getDeviceInfoList(userId);
     }
 }

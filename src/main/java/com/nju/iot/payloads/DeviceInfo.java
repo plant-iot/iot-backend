@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author: xiang
@@ -23,7 +24,7 @@ public class DeviceInfo {
     @ApiModelProperty(value = "当前状态")
     private String state;
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    private String createTime;
     @ApiModelProperty(value = "设备类型")
     private String type;
     @ApiModelProperty(value = "用户id")
@@ -41,7 +42,8 @@ public class DeviceInfo {
             this.onOff = "离线";
         }
         this.state = device.getState().getS();
-        this.createTime = device.getRegisterTime();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        this.createTime = df.format(device.getRegisterTime());
         this.type = device.getType().getS();
         this.userId = device.getUser().getId();
     }
@@ -78,11 +80,11 @@ public class DeviceInfo {
         this.state = state;
     }
 
-    public LocalDateTime getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
