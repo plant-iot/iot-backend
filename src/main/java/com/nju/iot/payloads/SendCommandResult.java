@@ -8,8 +8,11 @@ package com.nju.iot.payloads;
  */
 public enum SendCommandResult {
     SUCCESS("成功"),
+    NO_COMMAND("命令不存在"),
     DEVICE_NOT_FOUND("未找到对应设备"),
-    SENSOR_COMMAND("设备无法接受命令");
+    OFF_LINE("设备已离线"),
+    SENSOR_COMMAND("设备无法接受命令"),
+    MISMATCHED_COMMAND("命令与设备不匹配");
 
     private final String s;
 

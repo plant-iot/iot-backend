@@ -20,4 +20,13 @@ public enum ServiceName {
     public String getS() {
         return s;
     }
+
+    public static ServiceName getInstance(String s) {
+        for(ServiceName name : ServiceName.values()) {
+            if(name.getS().equals(s)) {
+                return name;
+            }
+        }
+        return null;
+    }
 }

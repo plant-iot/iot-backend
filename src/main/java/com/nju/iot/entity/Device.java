@@ -24,6 +24,9 @@ public class Device {
     private DeviceType type;
 
     @NotNull
+    private String deviceName = "";
+
+    @NotNull
     private String topic = "";
 
     @NotNull
@@ -80,6 +83,14 @@ public class Device {
         this.user = user;
     }
 
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
+    }
+
     public DeviceType getType() {
         return type;
     }
@@ -118,5 +129,9 @@ public class Device {
 
     public void setOnline(Boolean online) {
         isOnline = online;
+    }
+
+    public boolean canSendCommand() {
+        return type.isCanSendCommand();
     }
 }

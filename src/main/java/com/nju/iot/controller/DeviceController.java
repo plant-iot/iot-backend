@@ -46,14 +46,14 @@ public class DeviceController {
     }
 
     @GetMapping("/sendCommands")
-    @ApiOperation("群体下发命令")
+    @ApiOperation("群体下发多条命令")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "deviceIdList", value = "设备id列表"),
-            @ApiImplicitParam(name = "command", value = "命令（json格式）"),
-//            @ApiImplicitParam(name = "type", value = "命令类型")
+            @ApiImplicitParam(name = "commands", value = "命令列表"),
+            @ApiImplicitParam(name = "values", value = "命令参数")
     })
-    public Map<Long, String> sendCommand(Long[] deviceIdList, String command/*, String type*/) {
-        return connectService.sendCommand(deviceIdList, command);
+    public Map<Long, String> sendCommand(Long[] deviceIdList, String[] commands, Double[] values) {
+        return connectService.sendCommand(deviceIdList, commands, values);
     }
 
     @GetMapping("/addDevice")
@@ -64,5 +64,32 @@ public class DeviceController {
     })
     public long addDevice(Long userId, String type) {
         return deviceService.addDevice(userId, DeviceType.getType(type));
+    }
+
+    @GetMapping("/deleteDevice")
+    @ApiOperation("删除设备")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "deviceId", value = "设备id")
+    })
+    public void deleteDevice(Long deviceId) {
+        deviceService.deleteDevice(deviceId);
+    }
+
+    @GetMapping("/disableDevice")
+    @ApiOperation("禁用设备")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "deviceId", value = "设备id")
+    })
+    public void disableDevice(Long deviceId) {
+        deviceService.disableDevice(deviceId);
+    }
+
+    @GetMapping("/enableDevice")
+    @ApiOperation("启用设备")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "deviceId", value = "设备id")
+    })
+    public boolean enableDevice(Long deviceId) {
+        return deviceService.enableDevice(deviceId);
     }
 }
