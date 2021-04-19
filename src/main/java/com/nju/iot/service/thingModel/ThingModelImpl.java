@@ -57,4 +57,9 @@ public class ThingModelImpl implements ThingModelInterface {
 
         return model;
     }
+
+    @Override
+    public List<ThingModel> getThingModelList() {
+        return thingModelRepository.findAll();
+    }
 }
