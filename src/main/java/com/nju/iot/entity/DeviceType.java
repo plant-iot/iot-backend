@@ -6,8 +6,8 @@ package com.nju.iot.entity;
  * @description: 设备类型
  */
 public enum DeviceType {
-    SENSOR("sensor", false, true),
-    EXECUTOR("executor", true, false);
+    SENSOR("传感器", false, true),
+    EXECUTOR("执行器", true, false);
 
     private final String s;
     private final boolean canSendCommand;
