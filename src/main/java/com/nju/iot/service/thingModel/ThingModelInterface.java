@@ -11,4 +11,6 @@ public interface ThingModelInterface {
     ThingModel analyseThingModel(ThingModelRequest request);
 
     ThingModel persistThingModel(ThingModelRequest request);
+
+    List<ThingModel> getThingModelList();
 }
