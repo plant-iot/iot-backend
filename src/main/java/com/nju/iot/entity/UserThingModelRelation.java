@@ -14,13 +14,21 @@ public class UserThingModelRelation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch= FetchType.LAZY)
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch= FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch= FetchType.EAGER)
     @JoinColumn(name = "thing_model")
     private ThingModel model;
+
+    public UserThingModelRelation(User user, ThingModel model) {
+        this.user = user;
+        this.model = model;
+    }
+
+    public UserThingModelRelation() {
+    }
 
     public Long getId() {
         return id;

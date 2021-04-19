@@ -1,7 +1,10 @@
 package com.nju.iot.dao;
 
+import com.nju.iot.entity.User;
 import com.nju.iot.entity.UserThingModelRelation;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * @author: xiang
@@ -10,4 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @description:
  */
 public interface UserThingModelRelationRepository extends JpaRepository<UserThingModelRelation, Long> {
+    List<UserThingModelRelation> findDistinctByUser(User user);
 }
