@@ -12,11 +12,13 @@ import java.util.Map;
  * @description:
  */
 public interface ConnectService {
-    // 下发命令
-    SendCommandResult sendCommand(Long deviceId, String command/*, CommandType type*/);
+    /*// 下发命令
+    SendCommandResult sendCommand(Long deviceId, String command*//*, CommandType type*//*);
 
     // 下发命令
-    Map<Long, String> sendCommand(Long[] deviceIdList, String command/*, CommandType type*/);
+    Map<Long, String> sendCommand(Long[] deviceIdList, String command*//*, CommandType type*//*);*/
 
     Map<Long, String> sendCommand(Long[] deviceIdList, String[] commands, Double[] values);
+
+    String sendCommand(Long deviceId, String[] commands, Double[] values);
 }
