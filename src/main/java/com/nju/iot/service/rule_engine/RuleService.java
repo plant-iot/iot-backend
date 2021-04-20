@@ -1,6 +1,9 @@
 package com.nju.iot.service.rule_engine;
 
+import com.nju.iot.entity.Rule;
 import com.nju.iot.entity.RuleType;
+
+import java.util.ArrayList;
 
 /**
  * @author: d_xin
@@ -15,4 +18,8 @@ public interface RuleService {
     boolean enableRule(String rule_id);
 
     boolean disableRule(String rule_id);
+
+    ArrayList<Rule> showTempRules();
+
+    ArrayList<Rule> showHumidityRules();
 }

@@ -14,5 +14,5 @@ public interface RE_TemperatureService {
 
     boolean sendTempWarningSignal(int signal);
 
-    ArrayList<Rule> showTempRules();
+    // ArrayList<Rule> showTempRules();
 }
