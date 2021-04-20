@@ -1,7 +1,5 @@
 package com.nju.iot.controller;
 
-import com.nju.iot.response.ResourceResponse;
-import com.nju.iot.response.Response;
 import com.nju.iot.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -30,8 +28,8 @@ public class UserController {
             @ApiImplicitParam(name = "userId", value = "用户id"),
             @ApiImplicitParam(name = "password", value = "密码")
     })
-    public Response login(long userId, String password) {
-        return new ResourceResponse(userService.login(userId, password).getS());
+    public String login(long userId, String password) {
+        return userService.login(userId, password).getS();
     }
 
     @GetMapping("/logout")

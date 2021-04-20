@@ -2,8 +2,6 @@ package com.nju.iot.controller;
 
 import com.nju.iot.service.connect.MqttPushClient;
 import com.nju.iot.dao.DeviceRepository;
-import com.nju.iot.response.ResourceResponse;
-import com.nju.iot.response.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -27,8 +25,8 @@ public class TestController {
     @GetMapping("/test")
     @ApiOperation("测试")
     @ApiImplicitParam(name = "str", value = "字符串")
-    public Response getDeviceState(String str) {
-        return new ResourceResponse("hello " + str + "   device num: " + deviceRepository.count());
+    public String getDeviceState(String str) {
+        return "hello " + str + "   device num: " + deviceRepository.count();
     }
 
     @Autowired

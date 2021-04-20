@@ -1,6 +1,9 @@
 package com.nju.iot.service.connect;
 
 import com.nju.iot.entity.CommandType;
+import com.nju.iot.payloads.SendCommandResult;
+
+import java.util.Map;
 
 /**
  * @author: xiang
@@ -10,5 +13,10 @@ import com.nju.iot.entity.CommandType;
  */
 public interface ConnectService {
     // 下发命令
-    boolean sendCommand(Long deviceId, String command, CommandType type);
+    SendCommandResult sendCommand(Long deviceId, String command/*, CommandType type*/);
+
+    // 下发命令
+    Map<Long, String> sendCommand(Long[] deviceIdList, String command/*, CommandType type*/);
+
+    Map<Long, String> sendCommand(Long[] deviceIdList, String[] commands, Double[] values);
 }

@@ -4,10 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.nju.iot.dao.DataRepository;
+import com.nju.iot.dao.DeviceOnOffRecordRepository;
 import com.nju.iot.dao.DeviceRepository;
-import com.nju.iot.entity.Data;
-import com.nju.iot.entity.DataType;
-import com.nju.iot.entity.Device;
+import com.nju.iot.entity.*;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -21,7 +20,6 @@ import java.time.LocalDateTime;
 
 /**
  * @author: xiang
- * TODO
  * @date: 2021/4/13
  * @description: 消费监听类
  */
@@ -35,6 +33,8 @@ public class PushCallback implements MqttCallback {
     private DataRepository dataRepository;
     @Autowired
     private DeviceRepository deviceRepository;
+    @Autowired
+    private DeviceOnOffRecordRepository deviceOnOffRecordRepository;
 
     private static MqttClient client;
 
@@ -53,6 +53,28 @@ public class PushCallback implements MqttCallback {
         // subscribe后得到的消息会执行到这里面
         logger.info("接收消息主题 : " + topic);
         logger.info("接收消息内容 : " + new String(mqttMessage.getPayload()));
+
+        if(topic.endsWith("/disconnected")) {
+            Long deviceId = Long.valueOf(topic.split("/")[4]);
+            logger.info("设备 {} 下线", deviceId);
+            if(deviceRepository.existsById(deviceId)) {
+                Device device = deviceRepository.findById(deviceId).get();
+                device.setOnline(false);
+                deviceRepository.save(device);
+                DeviceOnOffRecord record = new DeviceOnOffRecord(device, OnOffAction.OFF);
+                deviceOnOffRecordRepository.save(record);
+            }
+        }else if(topic.endsWith("/connected")) {
+            Long deviceId = Long.valueOf(topic.split("/")[4]);
+            logger.info("设备 {} 上线", deviceId);
+            if(deviceRepository.existsById(deviceId)) {
+                Device device = deviceRepository.findById(deviceId).get();
+                device.setOnline(true);
+                deviceRepository.save(device);
+                DeviceOnOffRecord record = new DeviceOnOffRecord(device, OnOffAction.ON);
+                deviceOnOffRecordRepository.save(record);
+            }
+        }
 
         String[] topicList = topic.split("/");
         if(topicList.length == 2) {

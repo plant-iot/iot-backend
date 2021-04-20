@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author: xiang
- * @date: 2021/4/13
- * @description: mqtt推送客户端
+ * TODO
+ * @date: 2021/4/19
+ * @description:
  */
 @Service
-public class MqttPushClient {
-    private static final Logger logger = LoggerFactory.getLogger(MqttPushClient.class);
+public class SysPushClient{
+    private static final Logger logger = LoggerFactory.getLogger(SysPushClient.class);
 
     @Autowired
     private PushCallback pushCallback;
@@ -26,7 +27,7 @@ public class MqttPushClient {
     }
 
     private static void setClient(MqttClient client) {
-        MqttPushClient.client = client;
+        SysPushClient.client = client;
     }
 
     public void connect(String host, String clientID, String username, String password, int timeout, int keepAlive) {
@@ -39,7 +40,7 @@ public class MqttPushClient {
             options.setPassword(password.toCharArray());
             options.setConnectionTimeout(timeout);
             options.setKeepAliveInterval(keepAlive);
-            MqttPushClient.setClient(client);
+            SysPushClient.setClient(client);
             try {
                 client.setCallback(pushCallback);
                 client.connect(options);
@@ -57,7 +58,7 @@ public class MqttPushClient {
         message.setQos(qos);
         message.setRetained(retained);
         message.setPayload(pushMessage.getBytes());
-        MqttTopic mqttTopic = MqttPushClient.getClient().getTopic(topic);
+        MqttTopic mqttTopic = SysPushClient.getClient().getTopic(topic);
         if(mqttTopic == null) {
             logger.info("topic not exist");
         }
@@ -76,7 +77,7 @@ public class MqttPushClient {
     public void subscribe(String topic) {
         logger.info("开始订阅主题" + topic);
         try {
-            MqttPushClient.getClient().subscribe(topic);
+            SysPushClient.getClient().subscribe(topic);
         } catch (MqttException e) {
             e.printStackTrace();
         }
