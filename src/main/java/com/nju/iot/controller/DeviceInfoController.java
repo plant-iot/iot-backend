@@ -1,6 +1,7 @@
 package com.nju.iot.controller;
 
 import com.nju.iot.payloads.DeviceInfo;
+import com.nju.iot.payloads.DeviceLog;
 import com.nju.iot.service.device.DeviceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -42,5 +43,23 @@ public class DeviceInfoController {
     })
     public List<DeviceInfo> getDeviceInfoList(long userId) {
         return deviceService.getDeviceInfoList(userId);
+    }
+
+    @GetMapping("/getDeviceLog")
+    @ApiOperation("查看设备日志")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "deviceId", value = "设备id"),
+    })
+    public DeviceLog getDeviceLog(long deviceId) {
+        return deviceService.getDeviceLog(deviceId);
+    }
+
+    @GetMapping("/getDeviceLogList")
+    @ApiOperation("查看设备日志列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id"),
+    })
+    public List<DeviceLog> getDeviceLogList(long userId) {
+        return deviceService.getDeviceLogList(userId);
     }
 }

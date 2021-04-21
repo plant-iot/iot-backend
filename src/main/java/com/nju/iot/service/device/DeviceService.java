@@ -2,6 +2,7 @@ package com.nju.iot.service.device;
 
 import com.nju.iot.entity.DeviceType;
 import com.nju.iot.payloads.DeviceInfo;
+import com.nju.iot.payloads.DeviceLog;
 import com.nju.iot.payloads.ThingModelRequest;
 
 import java.util.List;
@@ -35,4 +36,8 @@ public interface DeviceService {
 
     // 查看用户的设备信息列表
     List<DeviceInfo> getDeviceInfoList(long userId);
+
+    DeviceLog getDeviceLog(long deviceId);
+
+    List<DeviceLog> getDeviceLogList(long userId);
 }

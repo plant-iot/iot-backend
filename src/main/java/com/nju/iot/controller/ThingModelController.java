@@ -45,7 +45,7 @@ public class ThingModelController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id")
     })
-    public List<ThingModelInfo> addThingModel(Long userId) {
+    public List<ThingModelInfo> getThingModel(Long userId) {
         return thingModelInterface.getThingModel(userId);
     }
 }
