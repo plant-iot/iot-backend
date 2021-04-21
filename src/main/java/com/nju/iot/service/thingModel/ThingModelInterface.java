@@ -20,4 +20,6 @@ public interface ThingModelInterface {
 
     // 查看物模型
     List<ThingModelInfo> getThingModel(Long userId);
+
+    List<String> getDeviceThingModel(Long deviceId);
 }

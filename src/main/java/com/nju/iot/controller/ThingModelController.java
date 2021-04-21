@@ -45,4 +45,14 @@ public class ThingModelController {
     public List<ThingModelInfo> getThingModel(Long userId) {
         return thingModelInterface.getThingModel(userId);
     }
+
+    @GetMapping("/getDeviceThingModel")
+    @ApiOperation("查看设备物模型服务名称列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "deviceId", value = "设备id")
+    })
+    public List<String> getDeviceThingModel(Long deviceId) {
+        return thingModelInterface.getDeviceThingModel(deviceId);
+    }
+
 }

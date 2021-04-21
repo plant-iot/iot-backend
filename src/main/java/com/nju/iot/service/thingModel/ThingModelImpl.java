@@ -30,6 +30,8 @@ public class ThingModelImpl implements ThingModelInterface {
     private UserRepository userRepository;
     @Autowired
     private UserThingModelRelationRepository userThingModelRelationRepository;
+    @Autowired
+    private DeviceRepository deviceRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(ThingModelImpl.class);
 
@@ -93,6 +95,21 @@ public class ThingModelImpl implements ThingModelInterface {
         }
 
         return list;
+    }
+
+    @Override
+    public List<String> getDeviceThingModel(Long deviceId) {
+        List<String> serviceNameList = new LinkedList<>();
+        if(!deviceRepository.existsById(deviceId)) {
+            return serviceNameList;
+        }
+        Device device = deviceRepository.findById(deviceId).get();
+        ThingModel model = device.getModel();
+        List<ThingModelRecord> thingModelRecordList = thingModelRecordRepository.findDistinctByModel(model);
+        for(ThingModelRecord record : thingModelRecordList) {
+            serviceNameList.add(record.getService().getServiceName().getS());
+        }
+        return serviceNameList;
     }
 
     private ThingModelInfo getThingModelInfo(ThingModel thingModel) {
