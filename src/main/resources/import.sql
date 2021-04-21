@@ -29,5 +29,8 @@ INSERT INTO `iot_platform`.`device_group_relation` (`id`, `device_id`, `group_id
 INSERT INTO `iot_platform`.`device_group` (`id`, `group_name`, `user_id`) VALUES ('2', 'group2', '1');
 INSERT INTO `iot_platform`.`device_group_relation` (`id`, `device_id`, `group_id`) VALUES ('3', '1', '2');
 
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('1', '2021-04-17 19:55:49', 'TEMPERATURE', '23', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('2', '2021-04-17 19:55:49', 'HUMIDITY', '50', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('3', '2021-04-17 19:55:49', 'LIGHT_INTENSITY', '45', '1');
 
 

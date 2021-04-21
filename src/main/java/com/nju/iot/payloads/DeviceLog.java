@@ -31,7 +31,6 @@ public class DeviceLog {
         itemList = new LinkedList<>();
         itemList.add(new DeviceLogItem(device.getRegisterTime(), OnOffAction.ON));
         for(DeviceOnOffRecord record : recordList) {
-            System.out.println(record.getTime() + "\t" + record.getAction().getS());
             itemList.add(new DeviceLogItem(record));
         }
         Collections.sort(itemList);
