@@ -1,5 +1,9 @@
 package com.nju.iot.service.group;
 
+import com.nju.iot.payloads.GroupInfo;
+
+import java.util.List;
+
 /**
  * @author: xiang
  * TODO
@@ -8,4 +12,10 @@ package com.nju.iot.service.group;
  */
 public interface GroupService {
     boolean addGroup(Long userId, String name, Long[] deviceIdList);
+
+    // 查看设备组信息
+    List<GroupInfo> getGroupInfoList(long userId);
+
+    // 查看设备组信息
+    GroupInfo getGroupInfo(long userId, String name);
 }

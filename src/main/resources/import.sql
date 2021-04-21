@@ -20,6 +20,12 @@ INSERT INTO `iot_platform`.`thing_model_record` (`record_id`, `thing_model`, `se
 INSERT INTO `iot_platform`.`thing_model_record` (`record_id`, `thing_model`, `service_name`) VALUES ('5', '2', 'SUNSHINE_UP');
 INSERT INTO `iot_platform`.`thing_model_record` (`record_id`, `thing_model`, `service_name`) VALUES ('6', '2', 'SUNSHINE_DOWN');
 
+INSERT INTO `iot_platform`.`device_group` (`id`, `group_name`, `user_id`) VALUES ('1', 'group1', '1');
+INSERT INTO `iot_platform`.`device_group_relation` (`id`, `device_id`, `group_id`) VALUES ('1', '1', '1');
+INSERT INTO `iot_platform`.`device_group_relation` (`id`, `device_id`, `group_id`) VALUES ('2', '2', '1');
+
+INSERT INTO `iot_platform`.`device_group` (`id`, `group_name`, `user_id`) VALUES ('2', 'group2', '1');
+INSERT INTO `iot_platform`.`device_group_relation` (`id`, `device_id`, `group_id`) VALUES ('3', '1', '2');
 
 
 
