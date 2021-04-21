@@ -51,8 +51,8 @@ public class ThingModelImpl implements ThingModelInterface {
 
         if(!thingModelRepository.existsById(model.getModelId())) {
             thingModelRepository.save(model);
-            for(ThingModelService service: request.getServices()) {
-                thingModelServiceRepository.save(service);
+            for(String name: request.getServices()) {
+                ThingModelService service = thingModelServiceRepository.findById(name).get();
                 ThingModelRecord record = new ThingModelRecord(model, service);
                 thingModelRecordRepository.save(record);
             }
