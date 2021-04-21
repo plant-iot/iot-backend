@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * @description:
  */
 public interface RE_HumidityService {
-    boolean checkHumidityThreshold(Double humi_data);
+    boolean checkHumidityThreshold(Long userId, Double humi_data);
 
-    boolean sendHumidityWarningSignal(int signal);
+    boolean sendHumidityWarningSignal(Long userId, int signal);
 
     // ArrayList<Rule> showHumidityRules();
 }

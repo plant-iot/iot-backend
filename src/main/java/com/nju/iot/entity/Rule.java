@@ -1,9 +1,8 @@
 package com.nju.iot.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import com.sun.istack.NotNull;
+
+import javax.persistence.*;
 
 /**
  * @author: d_xin
@@ -13,14 +12,22 @@ import javax.persistence.Id;
 @Entity
 public class Rule {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private RuleType type;
 
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch= FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     private Double threshold_data = 0.0;
 
-    private boolean is_enabled = false;
+    @Enumerated(EnumType.STRING)
+    private RuleAction state = RuleAction.DISABLED;
+
+    // private boolean is_enabled = false;
 
     // private int priority = 0;  // 暂时规定为同一时间只能启用一条相关规则
 
@@ -28,18 +35,26 @@ public class Rule {
 
     }
 
-    public Rule(String id, RuleType type, Double data, boolean is_enabled){
-        this.id = id;
+    public Rule(RuleType type, User user, Double data, RuleAction rule_state){
         this.type = type;
+        this.user = user;
         this.threshold_data = data;
-        this.is_enabled = is_enabled;
+        this.state = rule_state;
     }
 
-    public String getId() {
+    public Rule(Long id, RuleType type, User user, Double data, RuleAction rule_state){
+        this.id = id;
+        this.type = type;
+        this.user = user;
+        this.threshold_data = data;
+        this.state = rule_state;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,6 +66,14 @@ public class Rule {
         this.type = type;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Double getThreshold_data() {
         return threshold_data;
     }
@@ -59,12 +82,12 @@ public class Rule {
         this.threshold_data = threshold_data;
     }
 
-    public boolean getIs_enabled() {
-        return is_enabled;
+    public RuleAction getState() {
+        return state;
     }
 
-    public void setIs_enabled(boolean is_enabled) {
-        this.is_enabled = is_enabled;
+    public void setState(RuleAction state) {
+        this.state = state;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.nju.iot.service.rule_engine.re_humiduty;
 
 import com.nju.iot.entity.Rule;
+import com.nju.iot.entity.RuleAction;
 import com.nju.iot.service.rule_engine.RuleImpl;
 import com.nju.iot.service.rule_engine.RuleService;
 import com.nju.iot.service.rule_engine.re_temperature.RE_TemperatureService;
@@ -16,13 +17,13 @@ import java.util.ArrayList;
 @Service
 public class RE_HumidityImpl implements RE_HumidityService {
     @Override
-    public boolean checkHumidityThreshold(Double humi_data) {
+    public boolean checkHumidityThreshold(Long userId, Double humi_data) {
         Rule current_enabled_humi_rule = null;
 
         RuleService ruleService = new RuleImpl();
-        ArrayList<Rule> humi_rules = ruleService.showHumidityRules();
+        ArrayList<Rule> humi_rules = ruleService.showHumidityRules(userId);
         for(int i = 0;i < humi_rules.size();i++){
-            if(humi_rules.get(i).getIs_enabled()){
+            if(humi_rules.get(i).getState() == RuleAction.ENABLED){
                 current_enabled_humi_rule = humi_rules.get(i);
                 break;
             }
@@ -38,7 +39,7 @@ public class RE_HumidityImpl implements RE_HumidityService {
     }
 
     @Override
-    public boolean sendHumidityWarningSignal(int signal) {
+    public boolean sendHumidityWarningSignal(Long userId, int signal) {
         return false;
     }
 }

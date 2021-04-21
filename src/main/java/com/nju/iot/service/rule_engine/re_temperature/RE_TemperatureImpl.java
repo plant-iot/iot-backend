@@ -1,10 +1,9 @@
 package com.nju.iot.service.rule_engine.re_temperature;
 
-import com.nju.iot.dao.RuleRepository;
 import com.nju.iot.entity.Rule;
+import com.nju.iot.entity.RuleAction;
 import com.nju.iot.service.rule_engine.RuleImpl;
 import com.nju.iot.service.rule_engine.RuleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,17 +15,14 @@ import java.util.ArrayList;
  */
 @Service
 public class RE_TemperatureImpl implements RE_TemperatureService {
-    @Autowired
-    private RuleRepository ruleRepository;
-
     @Override
-    public boolean checkTempThreshold(Double temp_data){
+    public boolean checkTempThreshold(Long userId, Double temp_data){
         Rule current_enabled_temp_rule = null;
 
         RuleService ruleService = new RuleImpl();
-        ArrayList<Rule> temp_rules = ruleService.showTempRules();
+        ArrayList<Rule> temp_rules = ruleService.showTempRules(userId);
         for(int i = 0;i < temp_rules.size();i++){
-            if(temp_rules.get(i).getIs_enabled()){
+            if(temp_rules.get(i).getState() == RuleAction.ENABLED){
                 current_enabled_temp_rule = temp_rules.get(i);
                 break;
             }
@@ -42,7 +38,7 @@ public class RE_TemperatureImpl implements RE_TemperatureService {
     }
 
     @Override
-    public boolean sendTempWarningSignal(int signal){
+    public boolean sendTempWarningSignal(Long userId, int signal){
         return false;
     }
 

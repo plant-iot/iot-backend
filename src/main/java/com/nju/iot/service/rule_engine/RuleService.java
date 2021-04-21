@@ -1,7 +1,9 @@
 package com.nju.iot.service.rule_engine;
 
 import com.nju.iot.entity.Rule;
+import com.nju.iot.entity.RuleAction;
 import com.nju.iot.entity.RuleType;
+import com.nju.iot.payloads.RuleInfo;
 
 import java.util.ArrayList;
 
@@ -11,15 +13,19 @@ import java.util.ArrayList;
  * @description:
  */
 public interface RuleService {
-    boolean addRule(RuleType type, Double data, boolean is_enabled);
+    Long addRule(RuleType type, Long user_id, Double data, RuleAction rule_state);
 
-    boolean deleteRule(String rule_id);
+    void deleteRule(Long id);
 
-    boolean enableRule(String rule_id);
+    boolean enableRule(Long id);
 
-    boolean disableRule(String rule_id);
+    void disableRule(Long id);
 
-    ArrayList<Rule> showTempRules();
+    ArrayList<Rule> showAllRulesByUserId(Long user_id);
 
-    ArrayList<Rule> showHumidityRules();
+    ArrayList<RuleInfo> showAllRulesInfoByUserId(Long user_id);
+
+    ArrayList<Rule> showTempRules(Long user_id);
+
+    ArrayList<Rule> showHumidityRules(Long user_id);
 }

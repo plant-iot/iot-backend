@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * @description:
  */
 public interface RE_TemperatureService {
-    boolean checkTempThreshold(Double temp_data);
+    boolean checkTempThreshold(Long userId, Double temp_data);
 
-    boolean sendTempWarningSignal(int signal);
+    boolean sendTempWarningSignal(Long userId, int signal);
 
     // ArrayList<Rule> showTempRules();
 }
