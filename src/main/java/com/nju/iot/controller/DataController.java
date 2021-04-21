@@ -1,7 +1,6 @@
 package com.nju.iot.controller;
 
 import com.nju.iot.payloads.DataRecord;
-import com.nju.iot.payloads.DeviceInfo;
 import com.nju.iot.service.data.DataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,9 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**

@@ -84,14 +84,25 @@ public class ThingModelImpl implements ThingModelInterface {
 
         if(userRepository.existsById(userId)) {
             User user = userRepository.findById(userId).get();
-            list.add(new ThingModelInfo(thingModelRepository.getOne(1)));
-            list.add(new ThingModelInfo(thingModelRepository.getOne(2)));
+            list.add(getThingModelInfo(thingModelRepository.getOne(1)));
+            list.add(getThingModelInfo(thingModelRepository.getOne(2)));
             List<UserThingModelRelation> relationList = userThingModelRelationRepository.findDistinctByUser(user);
             for(UserThingModelRelation relation : relationList) {
-                list.add(new ThingModelInfo(relation.getModel()));
+                list.add(getThingModelInfo(relation.getModel()));
             }
         }
 
         return list;
+    }
+
+    private ThingModelInfo getThingModelInfo(ThingModel thingModel) {
+        ThingModelInfo thingModelInfo = new ThingModelInfo(thingModel);
+
+        List<ThingModelRecord> recordList = thingModelRecordRepository.findDistinctByModel(thingModel);
+        for(ThingModelRecord thingModelRecord : recordList) {
+            thingModelInfo.addService(thingModelRecord.getService().getServiceName().getS());
+        }
+
+        return thingModelInfo;
     }
 }
