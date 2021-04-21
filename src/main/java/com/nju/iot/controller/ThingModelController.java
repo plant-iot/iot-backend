@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,7 +27,7 @@ public class ThingModelController {
     private ThingModelInterface thingModelInterface;
 
     // TODO test
-    @GetMapping("/addThingModel")
+    @PostMapping("/addThingModel")
     @ApiOperation("新增物模型")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id"),
