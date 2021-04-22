@@ -1,5 +1,6 @@
 package com.nju.iot.service.rule_engine;
 
+import com.nju.iot.entity.Data;
 import com.nju.iot.entity.Rule;
 import com.nju.iot.entity.RuleAction;
 import com.nju.iot.entity.RuleType;
@@ -17,6 +18,8 @@ public interface RuleService {
 
     void deleteRule(Long id);
 
+    boolean modifyRule(Long id);
+
     boolean enableRule(Long id);
 
     void disableRule(Long id);
@@ -28,4 +31,8 @@ public interface RuleService {
     ArrayList<Rule> showTempRules(Long user_id);
 
     ArrayList<Rule> showHumidityRules(Long user_id);
+
+    ArrayList<Data> getLatestDataList();
+
+    Rule getEnabledXXRule(Long user_id, String rule_type);
 }

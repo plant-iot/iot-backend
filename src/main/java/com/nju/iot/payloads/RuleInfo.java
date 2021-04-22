@@ -54,25 +54,25 @@ public class RuleInfo {
             this.description = "当温度超过" + this.threshold + "℃时告警";
         }else if(ruleType == RuleType.HUMIDITY_RULE) {
             this.type = "湿度规则";
-            this.description = "当湿度超过" + this.threshold + "时告警";
+            this.description = "当湿度低于" + this.threshold + "%时告警";
         }else if(ruleType == RuleType.CO2_RULE) {
             this.type = "CO2规则";
-            this.description = "当CO2超过" + this.threshold + "时告警";
+            this.description = "当CO2含量低于" + this.threshold + "%时告警";
         }else if(ruleType == RuleType.LIGHT_INTENSITY_RULE) {
             this.type = "光照强度规则";
-            this.description = "当光照强度超过" + this.threshold + "时告警";
+            this.description = "当光照强度低于" + this.threshold + "%时告警";
         }else if(ruleType == RuleType.K_CONTENT_RULE) {
             this.type = "K元素规则";
-            this.description = "当K含量超过" + this.threshold + "时告警";
+            this.description = "当K含量低于" + this.threshold + "%时告警";
         }else if(ruleType == RuleType.N_CONTENT_RULE) {
             this.type = "N元素规则";
-            this.description = "当N含量超过" + this.threshold + "时告警";
+            this.description = "当N含量低于" + this.threshold + "%时告警";
         }else if(ruleType == RuleType.P_CONTENT_RULE) {
             this.type = "P元素规则";
-            this.description = "当P含量超过" + this.threshold + "时告警";
+            this.description = "当P含量低于" + this.threshold + "%时告警";
         }else if(ruleType == RuleType.MG_CONTENT_RULE) {
             this.type = "Mg元素规则";
-            this.description = "当Mg含量超过" + this.threshold + "时告警";
+            this.description = "当Mg含量低于" + this.threshold + "%时告警";
         }
 
         this.userId = rule.getUser().getId();

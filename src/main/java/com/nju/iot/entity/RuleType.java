@@ -6,14 +6,14 @@ package com.nju.iot.entity;
  * @description:
  */
 public enum RuleType {
-    TEMPERATURE_RULE("temperature rule"),
-    HUMIDITY_RULE("humidity rule"),
-    CO2_RULE("CO2 rule"),
-    LIGHT_INTENSITY_RULE("light intensity rule"),
-    N_CONTENT_RULE("N content rule"),
-    P_CONTENT_RULE("P content rule"),
-    K_CONTENT_RULE("K content rule"),
-    MG_CONTENT_RULE("Mg content rule");
+    TEMPERATURE_RULE("TEMPERATURE_RULE"),
+    HUMIDITY_RULE("HUMIDITY_RULE"),
+    CO2_RULE("CO2_RULE"),
+    LIGHT_INTENSITY_RULE("LIGHT_INTENSITY_RULE"),
+    N_CONTENT_RULE("N_CONTENT_RULE"),
+    P_CONTENT_RULE("P_CONTENT_RULE"),
+    K_CONTENT_RULE("K_CONTENT_RULE"),
+    MG_CONTENT_RULE("MG_CONTENT_RULE");
 
     private final String s;
 
