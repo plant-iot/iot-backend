@@ -141,4 +141,18 @@ public class DeviceImpl implements DeviceService {
         }
         return deviceLogList;
     }
+    
+    @Override
+    public void dataAnalysis() {
+        String command = "python C:\\Users\\YTMartian\\Desktop\\iot-frontend-main\\static\\analysis.py";
+        try {
+            Process p = Runtime.getRuntime().exec(command);
+            p.waitFor();
+            if (p.exitValue() != 0) {
+                System.out.println("执行失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
