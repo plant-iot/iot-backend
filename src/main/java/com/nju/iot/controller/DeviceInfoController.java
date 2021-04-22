@@ -61,4 +61,9 @@ public class DeviceInfoController {
     public List<DeviceLog> getDeviceLogList(long userId) {
         return deviceService.getDeviceLogList(userId);
     }
+    @GetMapping("/dataAnalysis")
+    @ApiOperation("执行数据分析python文件")
+    public void dataAnalysis() {
+        deviceService.dataAnalysis();
+    }
 }
