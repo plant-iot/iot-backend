@@ -9,6 +9,8 @@ import com.nju.iot.service.thingModel.ThingModelInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -143,16 +145,25 @@ public class DeviceImpl implements DeviceService {
     }
     
     @Override
-    public void dataAnalysis() {
-        String command = "python C:\\Users\\YTMartian\\Desktop\\iot-frontend-main\\static\\analysis.py";
+    public String dataAnalysis() {
+        String command = "python ./analysis/analysis.py";
         try {
             Process p = Runtime.getRuntime().exec(command);
+            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream(),"gbk"));
+            String line;
+            String str = "";
+            while ((line = in.readLine()) != null) {
+                str += line;
+            }
+            in.close();
             p.waitFor();
             if (p.exitValue() != 0) {
                 System.out.println("执行失败");
             }
+            return str;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "";
     }
 }
