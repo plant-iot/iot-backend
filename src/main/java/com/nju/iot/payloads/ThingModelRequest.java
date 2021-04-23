@@ -13,6 +13,8 @@ import java.util.List;
  */
 @ApiModel
 public class ThingModelRequest {
+    @ApiModelProperty(value = "用户id")
+    long userId;
     @ApiModelProperty(value = "物模型id")
     int modelId;
     @ApiModelProperty(value = "物模型名称")
@@ -21,6 +23,13 @@ public class ThingModelRequest {
     String type;
     @ApiModelProperty(value = "具体服务")
     List<String> services;
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     public int getModelId() {
         return modelId;
@@ -36,5 +45,21 @@ public class ThingModelRequest {
 
     public List<String> getServices() {
         return services;
+    }
+
+    public void setModelId(int modelId) {
+        this.modelId = modelId;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setServices(List<String> services) {
+        this.services = services;
     }
 }

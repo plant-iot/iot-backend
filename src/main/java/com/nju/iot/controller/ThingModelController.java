@@ -26,15 +26,13 @@ public class ThingModelController {
     @Autowired
     private ThingModelInterface thingModelInterface;
 
-    // TODO test
-    @PostMapping("/addThingModel")
+    @PostMapping(value = "/addThingModel" ,produces = "application/json;charset=UTF-8")
     @ApiOperation("新增物模型")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户id"),
-            @ApiImplicitParam(name = "request", value = "物模型"),
+             @ApiImplicitParam(name = "request", value = "物模型"),
     })
-    public ThingModelInfo addThingModel(Long userId, @RequestBody ThingModelRequest request) {
-        return thingModelInterface.persistThingModel(userId, request);
+    public ThingModelInfo addThingModel(@RequestBody ThingModelRequest request) {
+        return thingModelInterface.persistThingModel(request.getUserId(), request);
     }
 
     @GetMapping("/getThingModel")

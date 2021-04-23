@@ -2,6 +2,7 @@ package com.nju.iot.payloads;
 
 import com.nju.iot.entity.DeviceType;
 import com.nju.iot.entity.ThingModel;
+import com.nju.iot.entity.ThingModelRecord;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

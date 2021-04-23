@@ -53,10 +53,12 @@ public class ThingModelImpl implements ThingModelInterface {
 
         if(!thingModelRepository.existsById(model.getModelId())) {
             thingModelRepository.save(model);
-            for(String name: request.getServices()) {
-                ThingModelService service = thingModelServiceRepository.findById(name).get();
-                ThingModelRecord record = new ThingModelRecord(model, service);
-                thingModelRecordRepository.save(record);
+            if(request.getServices() != null) {
+                for(String name: request.getServices()) {
+                    ThingModelService service = thingModelServiceRepository.findDistinctByDescription(name);
+                    ThingModelRecord record = new ThingModelRecord(model, service);
+                    thingModelRecordRepository.save(record);
+                }
             }
         }
 
@@ -77,7 +79,7 @@ public class ThingModelImpl implements ThingModelInterface {
         User user = userRepository.findById(userId).get();
         UserThingModelRelation relation = new UserThingModelRelation(user, thingModel);
         userThingModelRelationRepository.save(relation);
-        return new ThingModelInfo(thingModel);
+        return getThingModelInfo(thingModel);
     }
 
     @Override
