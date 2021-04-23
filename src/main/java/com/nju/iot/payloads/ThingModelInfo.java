@@ -5,9 +5,11 @@ import com.nju.iot.entity.ThingModel;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author: xiang
- * TODO
  * @date: 2021/4/20
  * @description:
  */
@@ -19,6 +21,8 @@ public class ThingModelInfo {
     private String modelName = "";
     @ApiModelProperty(value = "设备类型")
     private String deviceType;
+    @ApiModelProperty(value = "service列表")
+    private List<String> serviceList = new LinkedList<>();
 
     public ThingModelInfo() {
     }
@@ -39,5 +43,13 @@ public class ThingModelInfo {
 
     public String getDeviceType() {
         return deviceType;
+    }
+
+    public List<String> getServiceList() {
+        return serviceList;
+    }
+
+    public void addService(String service) {
+        this.serviceList.add(service);
     }
 }

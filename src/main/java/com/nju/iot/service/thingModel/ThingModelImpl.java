@@ -30,6 +30,8 @@ public class ThingModelImpl implements ThingModelInterface {
     private UserRepository userRepository;
     @Autowired
     private UserThingModelRelationRepository userThingModelRelationRepository;
+    @Autowired
+    private DeviceRepository deviceRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(ThingModelImpl.class);
 
@@ -51,8 +53,8 @@ public class ThingModelImpl implements ThingModelInterface {
 
         if(!thingModelRepository.existsById(model.getModelId())) {
             thingModelRepository.save(model);
-            for(ThingModelService service: request.getServices()) {
-                thingModelServiceRepository.save(service);
+            for(String name: request.getServices()) {
+                ThingModelService service = thingModelServiceRepository.findById(name).get();
                 ThingModelRecord record = new ThingModelRecord(model, service);
                 thingModelRecordRepository.save(record);
             }
@@ -84,14 +86,40 @@ public class ThingModelImpl implements ThingModelInterface {
 
         if(userRepository.existsById(userId)) {
             User user = userRepository.findById(userId).get();
-            list.add(new ThingModelInfo(thingModelRepository.getOne(1)));
-            list.add(new ThingModelInfo(thingModelRepository.getOne(2)));
+            list.add(getThingModelInfo(thingModelRepository.getOne(1)));
+            list.add(getThingModelInfo(thingModelRepository.getOne(2)));
             List<UserThingModelRelation> relationList = userThingModelRelationRepository.findDistinctByUser(user);
             for(UserThingModelRelation relation : relationList) {
-                list.add(new ThingModelInfo(relation.getModel()));
+                list.add(getThingModelInfo(relation.getModel()));
             }
         }
 
         return list;
+    }
+
+    @Override
+    public List<String> getDeviceThingModel(Long deviceId) {
+        List<String> serviceNameList = new LinkedList<>();
+        if(!deviceRepository.existsById(deviceId)) {
+            return serviceNameList;
+        }
+        Device device = deviceRepository.findById(deviceId).get();
+        ThingModel model = device.getModel();
+        List<ThingModelRecord> thingModelRecordList = thingModelRecordRepository.findDistinctByModel(model);
+        for(ThingModelRecord record : thingModelRecordList) {
+            serviceNameList.add(record.getService().getServiceName().getS());
+        }
+        return serviceNameList;
+    }
+
+    private ThingModelInfo getThingModelInfo(ThingModel thingModel) {
+        ThingModelInfo thingModelInfo = new ThingModelInfo(thingModel);
+
+        List<ThingModelRecord> recordList = thingModelRecordRepository.findDistinctByModel(thingModel);
+        for(ThingModelRecord thingModelRecord : recordList) {
+            thingModelInfo.addService(thingModelRecord.getService().getServiceName().getS());
+        }
+
+        return thingModelInfo;
     }
 }

@@ -8,8 +8,12 @@ import com.nju.iot.entity.Device;
 import com.nju.iot.entity.DeviceGroup;
 import com.nju.iot.entity.DeviceGroupRelation;
 import com.nju.iot.entity.User;
+import com.nju.iot.payloads.GroupInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author: xiang
@@ -53,5 +57,40 @@ public class GroupImpl implements GroupService {
         }
 
         return true;
+    }
+
+    @Override
+    public List<GroupInfo> getGroupInfoList(long userId) {
+        List<GroupInfo> groupInfoList = new LinkedList<>();
+
+        List<DeviceGroup> deviceGroupList = deviceGroupRepository.findDistinctByUserId(userId);
+        for(DeviceGroup deviceGroup : deviceGroupList) {
+            GroupInfo groupInfo = new GroupInfo(deviceGroup, userId);
+            List<DeviceGroupRelation> relationList = deviceGroupRelationRepository.findDistinctByDeviceGroup(deviceGroup);
+            for(DeviceGroupRelation relation : relationList) {
+                groupInfo.addDevice(relation.getDevice());
+            }
+            groupInfoList.add(groupInfo);
+        }
+
+        return groupInfoList;
+    }
+
+    @Override
+    public GroupInfo getGroupInfo(long userId, String name) {
+        if(!userRepository.existsById(userId)) {
+            return new GroupInfo();
+        }
+        User user = userRepository.findById(userId).get();
+        if(!deviceGroupRepository.existsByUserAndGroupName(user, name)) {
+            return new GroupInfo();
+        }
+        DeviceGroup group = deviceGroupRepository.findDistinctByUserAndGroupName(user, name);
+        GroupInfo info = new GroupInfo(group, userId);
+        List<DeviceGroupRelation> relationList = deviceGroupRelationRepository.findDistinctByDeviceGroup(group);
+        for(DeviceGroupRelation relation : relationList) {
+            info.addDevice(relation.getDevice());
+        }
+        return info;
     }
 }

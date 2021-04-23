@@ -30,7 +30,7 @@ public class ConnectImpl implements ConnectService {
     @Autowired
     private ThingModelRecordRepository thingModelRecordRepository;
 
-    @Override
+//    @Override
     public SendCommandResult sendCommand(Long deviceId, String command/*, CommandType type*/) {
         if(!deviceRepository.existsById(deviceId)) {
             return SendCommandResult.DEVICE_NOT_FOUND;
@@ -49,8 +49,8 @@ public class ConnectImpl implements ConnectService {
         return SendCommandResult.SUCCESS;
     }
 
-    @Override
-    public Map<Long, String> sendCommand(Long[] deviceIdList, String command) {
+//    @Override
+/*    public Map<Long, String> sendCommand(Long[] deviceIdList, String command) {
         Map<Long, String> resultMap = new HashMap<>();
 
         if(deviceIdList == null) {
@@ -65,7 +65,7 @@ public class ConnectImpl implements ConnectService {
         }
 
         return resultMap;
-    }
+    }*/
 
     @Override
     public Map<Long, String> sendCommand(Long[] deviceIdList, String[] commands, Double[] values) {
@@ -76,37 +76,40 @@ public class ConnectImpl implements ConnectService {
         }
 
         for(long id : deviceIdList) {
-            if(!deviceRepository.existsById(id)) {
-                resultMap.put(id, SendCommandResult.DEVICE_NOT_FOUND.getS());
-                continue;
-            }
-            Device device = deviceRepository.findById(id).get();
-            if(device.getState() != DeviceAction.IN_USE) {
-                resultMap.put(id, SendCommandResult.OFF_LINE.getS());
-                continue;
-            }
-            JSONObject jsonObject = new JSONObject();
-            SendCommandResult result = SendCommandResult.SUCCESS;
-            for(int i = 0 ; i < commands.length ; i++) {
-                String command = commands[i];
-                ServiceName name = ServiceName.getInstance(command);
-                if(null == name) {
-                    result = SendCommandResult.NO_COMMAND;
-                }else {
-                    ThingModel thingModel = device.getModel();
-                    if(thingModelRecordRepository.existsByModel(thingModel)) {
-                        jsonObject.put(name.toString(), values[i]);
-                    }else {
-                        result = SendCommandResult.MISMATCHED_COMMAND;
-                    }
-                }
-            }
-            if(result == SendCommandResult.SUCCESS) {
-                result = sendCommand(id, jsonObject.toJSONString());
-            }
-            resultMap.put(id, result.getS());
+            resultMap.put(id, sendCommand(id, commands, values));
         }
 
         return resultMap;
+    }
+
+    @Override
+    public String sendCommand(Long deviceId, String[] commands, Double[] values) {
+        if(!deviceRepository.existsById(deviceId)) {
+            return SendCommandResult.DEVICE_NOT_FOUND.getS();
+        }
+        Device device = deviceRepository.findById(deviceId).get();
+        if(device.getState() != DeviceAction.IN_USE) {
+            return SendCommandResult.OFF_LINE.getS();
+        }
+        JSONObject jsonObject = new JSONObject();
+        SendCommandResult result = SendCommandResult.SUCCESS;
+        for(int i = 0 ; i < commands.length ; i++) {
+            String command = commands[i];
+            ServiceName name = ServiceName.getInstance(command);
+            if(null == name) {
+                result = SendCommandResult.NO_COMMAND;
+            }else {
+                ThingModel thingModel = device.getModel();
+                if(thingModelRecordRepository.existsByModel(thingModel)) {
+                    jsonObject.put(name.toString(), values[i]);
+                }else {
+                    result = SendCommandResult.MISMATCHED_COMMAND;
+                }
+            }
+        }
+        if(result == SendCommandResult.SUCCESS) {
+            result = sendCommand(deviceId, jsonObject.toJSONString());
+        }
+        return result.getS();
     }
 }

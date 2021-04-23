@@ -2,7 +2,6 @@ package com.nju.iot.entity;
 
 /**
  * @author: xiang
- * TODO
  * @date: 2021/4/11
  * @description:
  */

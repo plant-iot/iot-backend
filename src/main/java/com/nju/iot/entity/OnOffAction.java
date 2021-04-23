@@ -7,5 +7,15 @@ package com.nju.iot.entity;
  * @description:
  */
 public enum OnOffAction {
-    ON,OFF;
+    ON("上线"),OFF("下线");
+
+    private final String s;
+
+    OnOffAction(String s) {
+        this.s = s;
+    }
+
+    public String getS() {
+        return s;
+    }
 }

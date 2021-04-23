@@ -20,7 +20,7 @@ public class ThingModelRequest {
     @ApiModelProperty(value = "传感器/执行器")
     String type;
     @ApiModelProperty(value = "具体服务")
-    List<ThingModelService> services;
+    List<String> services;
 
     public int getModelId() {
         return modelId;
@@ -34,7 +34,7 @@ public class ThingModelRequest {
         return type;
     }
 
-    public List<ThingModelService> getServices() {
+    public List<String> getServices() {
         return services;
     }
 }

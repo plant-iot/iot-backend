@@ -34,15 +34,11 @@ public class DeviceController {
     @ApiOperation("下发命令")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "deviceId", value = "设备id"),
-            @ApiImplicitParam(name = "command", value = "命令（json格式）"),
-//            @ApiImplicitParam(name = "type", value = "命令类型")
+            @ApiImplicitParam(name = "commands", value = "命令类型"),
+            @ApiImplicitParam(name = "values", value = "命令参数")
     })
-    public String sendCommand(long deviceId, String command/*, String type*/) {
-        /*CommandType commandType = CommandType.getCommandType(type);
-        if(commandType == null) {
-            return false;
-        }*/
-        return connectService.sendCommand(deviceId, command).getS();
+    public String sendCommand(long deviceId, String[] commands, Double[] values) {
+        return connectService.sendCommand(deviceId, commands, values);
     }
 
     @GetMapping("/sendCommands")
