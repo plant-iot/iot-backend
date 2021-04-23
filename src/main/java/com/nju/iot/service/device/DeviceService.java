@@ -42,5 +42,5 @@ public interface DeviceService {
     List<DeviceLog> getDeviceLogList(long userId);
     
     //执行数据分析python文件
-    void dataAnalysis();
+    String dataAnalysis();
 }
