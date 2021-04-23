@@ -1,8 +1,6 @@
 package com.nju.iot.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.nju.iot.dao.DataRepository;
 import com.nju.iot.entity.*;
 import com.nju.iot.payloads.RuleInfo;
 import com.nju.iot.payloads.WarningInfo;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-import static java.lang.Long.parseLong;
 
 /**
  * @author: d_xin
@@ -43,7 +40,7 @@ public class RuleEngineController {
     })
     public Object addRule(@RequestBody Object rule_data){
     //public Long addRule(Long userId, String type, String data) {
-        System.out.println("call controller-addRule, json_data=" + rule_data.toString());
+        // System.out.println("call controller-addRule, json_data=" + rule_data.toString());
 
         JSONObject jo = (JSONObject) JSONObject.toJSON(rule_data);
 //        System.out.println("jo_uid=" + jo.getString("userId"));
@@ -60,7 +57,7 @@ public class RuleEngineController {
 //        System.out.println("data=" + data);
 
         Long rule_id = ruleService.addRule(rt, Long.parseLong(userId), Double.parseDouble(data), RuleAction.ENABLED);
-        System.out.println("call backend: addRule, rule_id=" + rule_id);
+        System.out.println("call backend: addRule, new_rule_id=" + rule_id);
         return rule_id;
     }
 
@@ -128,45 +125,45 @@ public class RuleEngineController {
     @GetMapping("/check_and_warn")
     @ApiOperation("检测温度/湿度/CO2/光照强度的阈值和告警")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "user_id_data", value = "用户id")
+            @ApiImplicitParam(name = "userId", value = "用户id")
     })
-    public WarningInfo checkThresholdAndWarn(Long user_id) {
+    public WarningInfo checkThresholdAndWarn(Long userId) {  // 参数名和前端一致
+        // System.out.println("call controller-checkandwarn, userid=" + userId);
         WarningInfo warningInfo = new WarningInfo();  // 默认均为”暂无告警“
 
-        // TODO
-        warningInfo.setTemp_warn("告警：当前温度为30℃，已超过25℃！");
-        warningInfo.setHumi_warn("告警：当前湿度：50%，已低于70%！");
-        warningInfo.setCo2_warn("告警：当前CO2含量为20%，已低于50%！");
-        warningInfo.setLight_warn("告警：当前光照强度为10%，已低于60%！");
+//        warningInfo.setTemp_warn("告警：当前温度为30℃，已超过25℃！");
+//        warningInfo.setHumi_warn("告警：当前湿度：50%，已低于70%！");
+//        warningInfo.setCo2_warn("告警：当前CO2含量为20%，已低于50%！");
+//        warningInfo.setLight_warn("告警：当前光照强度为10%，已低于60%！");
 
-//        ArrayList<Data> data_list = ruleService.getLatestDataList();
-//        // 如果没有数据
-//        if (data_list == null || data_list.size() == 0){
-//            return warningInfo;
-//        }
-//        // 如果有数据，查规则，比较阈值
-//        Rule tempr = ruleService.getEnabledXXRule(user_id, "TEMPERATURE_RULE");
-//        Rule humir = ruleService.getEnabledXXRule(user_id, "HUMIDITY_RULE");
-//        Rule co2r = ruleService.getEnabledXXRule(user_id, "CO2_RULE");
-//        Rule lightr = ruleService.getEnabledXXRule(user_id, "LIGHT_INTENSITY_RULE");
-//        for (Data tempd : data_list){
-//            if (tempr != null && tempd.getDataType() == DataType.TEMPERATURE &&
-//                    tempd.getValue() - tempr.getThreshold_data() >= 0.1){  // 设置一个误差范围
-//                warningInfo.setTemp_warn("告警：当前温度为" + tempd.getValue() + "℃" + "，已超过" + tempr.getThreshold_data() + "℃！");
-//            }
-//            else if (humir != null && tempd.getDataType() == DataType.HUMIDITY &&
-//                    tempd.getValue() - humir.getThreshold_data() <= -0.1){
-//                warningInfo.setHumi_warn("告警：当前湿度为" + tempd.getValue() + "%" + "，已低于" + humir.getThreshold_data() + "%！");
-//            }
-//            else if (co2r != null && tempd.getDataType() == DataType.CO2 &&
-//                    tempd.getValue() - co2r.getThreshold_data() <= -0.1){
-//                warningInfo.setCo2_warn("告警：当前CO2含量为" + tempd.getValue() + "%" + "，已低于" + co2r.getThreshold_data() + "%！");
-//            }
-//            else if (lightr != null && tempd.getDataType() == DataType.LIGHT_INTENSITY &&
-//                    tempd.getValue() - lightr.getThreshold_data() <= -0.1){
-//                warningInfo.setLight_warn("告警：当前光照强度为" + tempd.getValue() + "%" + "，已低于" + lightr.getThreshold_data() + "%！");
-//            }
-//        }
+        ArrayList<Data> data_list = ruleService.getLatestDataList();
+        // 如果没有数据
+        if (data_list == null || data_list.size() == 0){
+            return warningInfo;
+        }
+        // 如果有数据，查规则，比较阈值
+        Rule tempr = ruleService.getEnabledXXRule(userId, "TEMPERATURE_RULE");
+        Rule humir = ruleService.getEnabledXXRule(userId, "HUMIDITY_RULE");
+        Rule co2r = ruleService.getEnabledXXRule(userId, "CO2_RULE");
+        Rule lightr = ruleService.getEnabledXXRule(userId, "LIGHT_INTENSITY_RULE");
+        for (Data tempd : data_list){
+            if (tempr != null && tempd.getDataType() == DataType.TEMPERATURE &&
+                    tempd.getValue() - tempr.getThreshold_data() >= 0.1){  // 设置一个误差范围
+                warningInfo.setTemp_warn("告警：当前温度为" + tempd.getValue() + "℃" + "，已超过" + tempr.getThreshold_data() + "℃！");
+            }
+            else if (humir != null && tempd.getDataType() == DataType.HUMIDITY &&
+                    tempd.getValue() - humir.getThreshold_data() <= -0.1){
+                warningInfo.setHumi_warn("告警：当前湿度为" + tempd.getValue() + "%" + "，已低于" + humir.getThreshold_data() + "%！");
+            }
+            else if (co2r != null && tempd.getDataType() == DataType.CO2 &&
+                    tempd.getValue() - co2r.getThreshold_data() <= -0.1){
+                warningInfo.setCo2_warn("告警：当前CO2含量为" + tempd.getValue() + "%" + "，已低于" + co2r.getThreshold_data() + "%！");
+            }
+            else if (lightr != null && tempd.getDataType() == DataType.LIGHT_INTENSITY &&
+                    tempd.getValue() - lightr.getThreshold_data() <= -0.1){
+                warningInfo.setLight_warn("告警：当前光照强度为" + tempd.getValue() + "%" + "，已低于" + lightr.getThreshold_data() + "%！");
+            }
+        }
         return warningInfo;
     }
 
