@@ -63,7 +63,7 @@ public class DeviceInfoController {
     }
     @GetMapping("/dataAnalysis")
     @ApiOperation("执行数据分析python文件")
-    public void dataAnalysis() {
-        deviceService.dataAnalysis();
+    public String dataAnalysis() {
+        return deviceService.dataAnalysis();
     }
 }
