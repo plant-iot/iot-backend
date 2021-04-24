@@ -10,6 +10,9 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 
@@ -29,9 +32,11 @@ public class ThingModelController {
     @PostMapping(value = "/addThingModel" ,produces = "application/json;charset=UTF-8")
     @ApiOperation("新增物模型")
     @ApiImplicitParams({
-             @ApiImplicitParam(name = "request", value = "物模型"),
+             @ApiImplicitParam(name = "requestStr", value = "物模型"),
     })
-    public ThingModelInfo addThingModel(@RequestBody ThingModelRequest request) {
+    public ThingModelInfo addThingModel(@RequestBody String requestStr) {
+        JSONObject object = JSON.parseObject(requestStr);
+        ThingModelRequest request = object.getObject("request", ThingModelRequest.class);
         return thingModelInterface.persistThingModel(request.getUserId(), request);
     }
 
