@@ -57,26 +57,29 @@
     <caption>统计</caption>
     <th></th>
     <th></th>
-    <th>VAR00002</th>
-    <th>VAR00003</th>
+    <th>温度</th>
+    <th>湿度</th>
+    <th>光照</th>
   </tr>
   <tr>
     <td>个案数</td>
     <td>有效</td>
     <td>{temperature_valid}</td>
     <td>{humidity_valid}</td>
+    <td>{light_valid}</td>
   </tr>
   <tr>
     <td> </td>
     <td>缺失</td>
     <td>{temperature_invalid}</td>
     <td>{humidity_invalid}</td>
+    <td>{light_invalid}</td>
   </tr>
 </table>
 <br>
 <table>
   <tr>
-    <caption>VAR00002频率统计</caption>
+    <caption>温度频率统计</caption>
     <th></th>
     <th>频率</th>
     <th>百分比</th>
@@ -88,7 +91,7 @@
 <br>
 <table border="1" style="text-align: center">
   <tr>
-    <caption>VAR00003频率统计</caption>
+    <caption>湿度</caption>
     <th></th>
     <th>频率</th>
     <th>百分比</th>
@@ -96,6 +99,18 @@
     <th>累积百分比</th>
   </tr>
   {humidity_frequency}
+</table>
+<br>
+<table border="1" style="text-align: center">
+  <tr>
+    <caption>光照</caption>
+    <th></th>
+    <th>频率</th>
+    <th>百分比</th>
+    <th>有效百分比</th>
+    <th>累积百分比</th>
+  </tr>
+  {light_frequency}
 </table>
 <br>
 <table>
@@ -108,7 +123,7 @@
   <th>标准差</th>
   </tr>
   <tr>
-    <td>VAR00002</td>
+    <td>温度</td>
     <td>{temperature0}</td>
     <td>{temperature1}</td>
     <td>{temperature2}</td>
@@ -116,12 +131,20 @@
     <td>{temperature4}</td>
   </tr>
   <tr>
-    <td>VAR00003</td>
+    <td>湿度</td>
     <td>{humidity0}</td>
     <td>{humidity1}</td>
     <td>{humidity2}</td>
     <td>{humidity3}</td>
     <td>{humidity4}</td>
+  </tr>
+  <tr>
+    <td>光照</td>
+    <td>{light0}</td>
+    <td>{light1}</td>
+    <td>{light2}</td>
+    <td>{light3}</td>
+    <td>{light4}</td>
   </tr>
   <tr>
     <td>有效个案数（成列）</td>
