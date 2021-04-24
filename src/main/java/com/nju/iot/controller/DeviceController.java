@@ -57,7 +57,7 @@ public class DeviceController {
     @ApiOperation("添加设备")
     @ApiImplicitParams({
     })
-    public DeviceInfo addDevice(@RequestBody String str) {
+    public long addDevice(@RequestBody String str) {
         JSONObject json = JSON.parseObject(str);
         return deviceService.addDevice(json.getLong("userId"),
                 DeviceType.getType(json.getString("type")),

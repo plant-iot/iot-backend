@@ -34,11 +34,9 @@ public class DeviceImpl implements DeviceService {
     private ThingModelRepository thingModelRepository;
 
     @Override
-    public DeviceInfo addDevice(Long userId, DeviceType type, String deviceName, int modelId) {
-        DeviceInfo deviceInfo = new DeviceInfo();
-        deviceInfo.setId(-1);
+    public long addDevice(Long userId, DeviceType type, String deviceName, int modelId) {
         if(!userRepository.existsById(userId) || !thingModelRepository.existsById(modelId)) {
-            return deviceInfo;
+            return -1L;
         }
 
         User user = userRepository.findById(userId).get();
@@ -48,7 +46,7 @@ public class DeviceImpl implements DeviceService {
         deviceRepository.save(device);
         device.setTopic("test/" + device.getDeviceId());
         deviceRepository.save(device);
-        return getDeviceInfo(device.getDeviceId());
+        return device.getDeviceId();
     }
 
     @Override
