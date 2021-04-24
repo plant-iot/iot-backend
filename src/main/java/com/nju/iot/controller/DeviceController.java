@@ -1,5 +1,7 @@
 package com.nju.iot.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.nju.iot.entity.CommandType;
 import com.nju.iot.entity.DeviceType;
 import com.nju.iot.payloads.DeviceInfo;
@@ -10,9 +12,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -53,16 +53,16 @@ public class DeviceController {
         return connectService.sendCommand(deviceIdList, commands, values);
     }
 
-    @GetMapping("/addDevice")
+    @PostMapping("/addDevice")
     @ApiOperation("添加设备")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", value = "用户id"),
-            @ApiImplicitParam(name = "type", value = "设备类型"),
-            @ApiImplicitParam(name = "deviceName", value = "设备名"),
-            @ApiImplicitParam(name = "modelId", value = "物模型"),
     })
-    public DeviceInfo addDevice(Long userId, String type, String deviceName, int modelId) {
-        return deviceService.addDevice(userId, DeviceType.getType(type), deviceName, modelId);
+    public DeviceInfo addDevice(@RequestBody String str) {
+        JSONObject json = JSON.parseObject(str);
+        return deviceService.addDevice(json.getLong("userId"),
+                DeviceType.getType(json.getString("type")),
+                json.getString("deviceName"),
+                json.getIntValue("modelId"));
     }
 
     @GetMapping("/deleteDevice")
