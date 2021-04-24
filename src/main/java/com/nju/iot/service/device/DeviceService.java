@@ -16,7 +16,7 @@ import java.util.List;
 public interface DeviceService {
     // 新建设备
     // 返回：正：创建成功，返回设备id；负：创建失败
-    long addDevice(Long userId, DeviceType type);
+    DeviceInfo addDevice(Long userId, DeviceType type, String deviceName, int modelId);
 
     // 新建设备
     // 返回：正：创建成功，返回设备id；负：创建失败

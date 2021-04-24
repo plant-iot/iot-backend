@@ -2,6 +2,7 @@ package com.nju.iot.controller;
 
 import com.nju.iot.entity.CommandType;
 import com.nju.iot.entity.DeviceType;
+import com.nju.iot.payloads.DeviceInfo;
 import com.nju.iot.service.connect.ConnectService;
 import com.nju.iot.service.device.DeviceService;
 import io.swagger.annotations.Api;
@@ -56,10 +57,12 @@ public class DeviceController {
     @ApiOperation("添加设备")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id"),
-            @ApiImplicitParam(name = "type", value = "设备类型")
+            @ApiImplicitParam(name = "type", value = "设备类型"),
+            @ApiImplicitParam(name = "deviceName", value = "设备名"),
+            @ApiImplicitParam(name = "modelId", value = "物模型"),
     })
-    public long addDevice(Long userId, String type) {
-        return deviceService.addDevice(userId, DeviceType.getType(type));
+    public DeviceInfo addDevice(Long userId, String type, String deviceName, int modelId) {
+        return deviceService.addDevice(userId, DeviceType.getType(type), deviceName, modelId);
     }
 
     @GetMapping("/deleteDevice")
