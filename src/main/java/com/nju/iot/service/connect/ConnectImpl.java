@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,24 +50,6 @@ public class ConnectImpl implements ConnectService {
         return SendCommandResult.SUCCESS;
     }
 
-//    @Override
-/*    public Map<Long, String> sendCommand(Long[] deviceIdList, String command) {
-        Map<Long, String> resultMap = new HashMap<>();
-
-        if(deviceIdList == null) {
-            return resultMap;
-        }
-
-        for(long id : deviceIdList) {
-            SendCommandResult result = sendCommand(id, command);
-            if(result != SendCommandResult.SUCCESS) {
-                resultMap.put(id, result.getS());
-            }
-        }
-
-        return resultMap;
-    }*/
-
     @Override
     public Map<Long, String> sendCommand(Long[] deviceIdList, String[] commands, Double[] values) {
         Map<Long, String> resultMap = new HashMap<>();
@@ -84,6 +67,10 @@ public class ConnectImpl implements ConnectService {
 
     @Override
     public String sendCommand(Long deviceId, String[] commands, Double[] values) {
+        System.out.println("in send command");
+        System.out.println("device: " + deviceId);
+        System.out.println("commands: " + Arrays.toString(commands));
+        System.out.println("values: " + Arrays.toString(values));
         if(!deviceRepository.existsById(deviceId)) {
             return SendCommandResult.DEVICE_NOT_FOUND.getS();
         }

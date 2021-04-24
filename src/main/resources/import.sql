@@ -29,8 +29,48 @@ INSERT INTO `iot_platform`.`device_group_relation` (`id`, `device_id`, `group_id
 INSERT INTO `iot_platform`.`device_group` (`id`, `group_name`, `user_id`) VALUES ('2', 'group2', '1');
 INSERT INTO `iot_platform`.`device_group_relation` (`id`, `device_id`, `group_id`) VALUES ('3', '1', '2');
 
-INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('1', '2021-04-17 19:55:49', 'TEMPERATURE', '23', '1');
-INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('2', '2021-04-17 19:55:49', 'HUMIDITY', '50', '1');
-INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('3', '2021-04-17 19:55:49', 'LIGHT_INTENSITY', '45', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('1', '2021-04-17 09:55:49', 'TEMPERATURE', '23', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('2', '2021-04-17 09:55:49', 'HUMIDITY', '50', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('3', '2021-04-17 09:55:49', 'LIGHT_INTENSITY', '45', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('4', '2021-04-17 09:55:49', 'CO2', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('5', '2021-04-17 09:55:49', 'N_CONTENT', '5', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('6', '2021-04-17 09:55:49', 'P_CONTENT', '4', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('7', '2021-04-17 09:55:49', 'K_CONTENT', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('8', '2021-04-17 09:55:49', 'MG_CONTENT', '5', '1');
 
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('9', '2021-04-17 10:55:49', 'TEMPERATURE', '23', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('10', '2021-04-17 10:55:49', 'HUMIDITY', '50', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('11', '2021-04-17 10:55:49', 'LIGHT_INTENSITY', '45', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('12', '2021-04-17 10:55:49', 'CO2', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('13', '2021-04-17 10:55:49', 'N_CONTENT', '5', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('14', '2021-04-17 10:55:49', 'P_CONTENT', '4', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('15', '2021-04-17 10:55:49', 'K_CONTENT', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('16', '2021-04-17 10:55:49', 'MG_CONTENT', '5', '1');
+
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('17', '2021-04-17 11:55:49', 'TEMPERATURE', '23', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('18', '2021-04-17 11:55:49', 'HUMIDITY', '50', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('19', '2021-04-17 11:55:49', 'LIGHT_INTENSITY', '45', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('20', '2021-04-17 11:55:49', 'CO2', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('21', '2021-04-17 11:55:49', 'N_CONTENT', '5', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('22', '2021-04-17 11:55:49', 'P_CONTENT', '4', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('23', '2021-04-17 11:55:49', 'K_CONTENT', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('24', '2021-04-17 11:55:49', 'MG_CONTENT', '5', '1');
+
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('25', '2021-04-17 12:55:49', 'TEMPERATURE', '23', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('26', '2021-04-17 12:55:49', 'HUMIDITY', '50', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('27', '2021-04-17 12:55:49', 'LIGHT_INTENSITY', '45', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('28', '2021-04-17 12:55:49', 'CO2', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('29', '2021-04-17 12:55:49', 'N_CONTENT', '5', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('30', '2021-04-17 12:55:49', 'P_CONTENT', '4', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('31', '2021-04-17 12:55:49', 'K_CONTENT', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('32', '2021-04-17 12:55:49', 'MG_CONTENT', '5', '1');
+
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('33', '2021-04-17 13:55:49', 'TEMPERATURE', '23', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('34', '2021-04-17 13:55:49', 'HUMIDITY', '50', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('35', '2021-04-17 13:55:49', 'LIGHT_INTENSITY', '45', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('36', '2021-04-17 13:55:49', 'CO2', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('37', '2021-04-17 13:55:49', 'N_CONTENT', '5', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('38', '2021-04-17 13:55:49', 'P_CONTENT', '4', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('39', '2021-04-17 13:55:49', 'K_CONTENT', '2', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('40', '2021-04-17 13:55:49', 'MG_CONTENT', '5', '1');
 

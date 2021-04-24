@@ -9,7 +9,8 @@ package com.nju.iot.entity;
 public enum ServiceName {
     SUNSHINE_DOWN("调低光照"),
     SUNSHINE_UP("调高光照"),
-    WATER("浇水"),;
+    WATER("浇水"),
+    APPLY_FERTILIZER("施肥");
 
     private final String s;
 

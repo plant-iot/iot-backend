@@ -31,26 +31,32 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
 
-    @GetMapping("/sendCommand")
+    @PostMapping("/sendCommand")
     @ApiOperation("下发命令")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "deviceId", value = "设备id"),
+            /*@ApiImplicitParam(name = "deviceId", value = "设备id"),
             @ApiImplicitParam(name = "commands", value = "命令类型"),
-            @ApiImplicitParam(name = "values", value = "命令参数")
+            @ApiImplicitParam(name = "values", value = "命令参数")*/
     })
-    public String sendCommand(long deviceId, String[] commands, Double[] values) {
-        return connectService.sendCommand(deviceId, commands, values);
+    public String sendCommand(@RequestBody String requestStr/*long deviceId, String[] commands, Double[] values*/) {
+        JSONObject object = JSON.parseObject(requestStr);
+        return connectService.sendCommand(object.getLong("deviceId"),
+                object.getObject("commands", String[].class),
+                object.getObject("values", Double[].class));
     }
 
-    @GetMapping("/sendCommands")
+    @PostMapping("/sendCommands")
     @ApiOperation("群体下发多条命令")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "deviceIdList", value = "设备id列表"),
+            /*@ApiImplicitParam(name = "deviceIdList", value = "设备id列表"),
             @ApiImplicitParam(name = "commands", value = "命令列表"),
-            @ApiImplicitParam(name = "values", value = "命令参数")
+            @ApiImplicitParam(name = "values", value = "命令参数")*/
     })
-    public Map<Long, String> sendCommand(Long[] deviceIdList, String[] commands, Double[] values) {
-        return connectService.sendCommand(deviceIdList, commands, values);
+    public Map<Long, String> sendCommands(@RequestBody String requestStr/*Long[] deviceIdList, String[] commands, Double[] values*/) {
+        JSONObject object = JSON.parseObject(requestStr);
+        return connectService.sendCommand(object.getObject("deviceIdList", Long[].class),
+                object.getObject("commands", String[].class),
+                object.getObject("values", Double[].class));
     }
 
     @PostMapping("/addDevice")
