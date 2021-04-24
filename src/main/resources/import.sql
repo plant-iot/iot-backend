@@ -74,3 +74,5 @@ INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) V
 INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('39', '2021-04-17 13:55:49', 'K_CONTENT', '2', '1');
 INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('40', '2021-04-17 13:55:49', 'MG_CONTENT', '5', '1');
 
+INSERT INTO `iot_platform`.`rule` (`id`, `state`, `threshold_data`, `type`, `user_id`) VALUES ('1', 'ENABLED', '30', 'TEMPERATURE_RULE', '1');
+INSERT INTO `iot_platform`.`rule` (`id`, `state`, `threshold_data`, `type`, `user_id`) VALUES ('2', 'ENABLED', '40', 'HUMIDITY_RULE', '1');
