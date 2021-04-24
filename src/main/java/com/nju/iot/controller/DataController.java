@@ -39,11 +39,12 @@ public class DataController {
     @ApiOperation("过滤查看数据信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id"),
+            @ApiImplicitParam(name = "deviceId", value = "设备id"),
             @ApiImplicitParam(name = "dataType", value = "数据类别"),
             @ApiImplicitParam(name = "start", value = "开始时间(yyyy-MM-dd)"),
             @ApiImplicitParam(name = "end", value = "结束时间(yyyy-MM-dd)"),
     })
-    public List<DataRecord> getData(long userId, String dataType, String start, String end) {
-        return dataService.getData(userId, dataType, start, end);
+    public List<DataRecord> getData(long userId, Long deviceId, String dataType, String start, String end) {
+        return dataService.getData(userId, deviceId, dataType, start, end);
     }
 }

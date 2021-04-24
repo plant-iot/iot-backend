@@ -42,7 +42,7 @@ public class DataImpl implements DataService {
     }
 
     @Override
-    public List<DataRecord> getData(long userId, String dataType, String start, String end) {
+    public List<DataRecord> getData(long userId, Long deviceId, String dataType, String start, String end) {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         LocalDateTime startTime = null;
@@ -61,6 +61,8 @@ public class DataImpl implements DataService {
         while(iterator.hasNext()) {
             DataRecord record = iterator.next();
             if(dataType != null && !dataType.isEmpty() && !dataType.equals(record.getDataType())) {
+                iterator.remove();
+            }if(deviceId != null && deviceId > 0 && record.getDeviceId() != deviceId) {
                 iterator.remove();
             }else {
                 LocalDateTime recordTime = LocalDateTime.parse(record.getTime(), df);

@@ -12,5 +12,5 @@ import java.util.List;
 public interface DataService {
     List<DataRecord> getData(long userId);
 
-    List<DataRecord> getData(long userId, String dataType, String start, String end);
+    List<DataRecord> getData(long userId, Long deviceId, String dataType, String start, String end);
 }
