@@ -36,7 +36,7 @@
     }
 
     tr:hover {
-      background: #cc0;
+      background: #6ccc9f;
     }
 
     td a {
@@ -48,10 +48,16 @@
       color: #06f;
       text-decoration: underline;
     }
+    table {
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
   </style>
 </head>
 <body>
-<table>
+<table class="styled-table">
   <tr>
     <!-- th为表格标题栏-->
     <caption>数据缺省统计</caption>
@@ -60,6 +66,7 @@
     <th>温度</th>
     <th>湿度</th>
     <th>光照</th>
+    <th>高度</th>
   </tr>
   <tr>
     <td>个案数</td>
@@ -67,6 +74,7 @@
     <td>{temperature_valid}</td>
     <td>{humidity_valid}</td>
     <td>{light_valid}</td>
+    <td>{height_valid}</td>
   </tr>
   <tr>
     <td> </td>
@@ -74,6 +82,7 @@
     <td>{temperature_invalid}</td>
     <td>{humidity_invalid}</td>
     <td>{light_invalid}</td>
+    <td>{height_invalid}</td>
   </tr>
 </table>
 <br>
@@ -113,6 +122,18 @@
   {light_frequency}
 </table>
 <br>
+<table border="1" style="text-align: center">
+  <tr>
+    <caption>高度频率统计</caption>
+    <th></th>
+    <th>频率</th>
+    <th>百分比</th>
+    <th>有效百分比</th>
+    <th>累积百分比</th>
+  </tr>
+  {height_frequency}
+</table>
+<br>
 <table>
   <caption>描述统计</caption>
   <th> </th>
@@ -146,6 +167,14 @@
     <td>{light3}</td>
     <td>{light4}</td>
   </tr>
+   <tr>
+    <td>高度</td>
+    <td>{height0}</td>
+    <td>{height1}</td>
+    <td>{height2}</td>
+    <td>{height3}</td>
+    <td>{height4}</td>
+  </tr>
   <tr>
     <td>有效个案数（成列）</td>
     <td>{valid_}</td>
@@ -155,5 +184,13 @@
     <td> </td>
   </tr>
 </table>
+<br>
+<table border="1" style="text-align: center">
+  <tr>
+    <caption>回归分析</caption>
+    <td>{regression}</td>
+  </tr>
+</table>
+<br>
 </body>
 </html>
