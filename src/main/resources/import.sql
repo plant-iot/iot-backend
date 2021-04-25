@@ -92,6 +92,12 @@ INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) V
 INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('46', '2021-04-17 14:55:49', 'P_CONTENT', '4', '1');
 INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('47', '2021-04-17 14:55:49', 'K_CONTENT', '2', '1');
 INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('48', '2021-04-17 14:55:49', 'MG_CONTENT', '5', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('49', '2021-04-17 14:55:50','HEIGHT', '24046', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('50', '2021-04-17 14:55:50','HEIGHT', '24047', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('51', '2021-04-17 14:55:50','HEIGHT', '24048', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('52', '2021-04-17 14:55:50','HEIGHT', '24049', '1');
+INSERT INTO `iot_platform`.`data` (`id`, `time`, `type`, `value`, `device_id`) VALUES ('53', '2021-04-17 14:55:50','HEIGHT', '24050', '1');
+
 
 INSERT INTO `iot_platform`.`rule` (`id`, `state`, `threshold_data`, `type`, `user_id`) VALUES ('1', 'ENABLED', '30', 'TEMPERATURE_RULE', '1');
 INSERT INTO `iot_platform`.`rule` (`id`, `state`, `threshold_data`, `type`, `user_id`) VALUES ('2', 'ENABLED', '40', 'HUMIDITY_RULE', '1');
